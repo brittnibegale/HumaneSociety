@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    public class Adopter
+    public class Customer
     {
+        MoneyBox wallet;
+
+        public Customer()
+        {
+            wallet = new MoneyBox();
+        }
     }
 }
