@@ -8,17 +8,17 @@ namespace HumaneSociety
 {
     public class MoneyBox
     {
-        double money;
+        decimal money;
         public MoneyBox()
         {
-            money = 100.00;
+            money = 300;
         }
-        public void RemoveMoney(double cash)
+        public void RemoveMoney(decimal cash)
         {
 
         }
 
-        public void AddMoney(double cash)
+        public void AddMoney(decimal cash)
         {
 
         }
