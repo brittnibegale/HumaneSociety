@@ -19,11 +19,6 @@ namespace HumaneSociety
         public Customer()
         {
             wallet = new MoneyBox();
-            
-            //hasCats = GetCatStatus();
-            //hasDogs = GetDogStatus();
-            //hasKids = GetFamilyStatus();
-            //firstAnimal = GetAnimalStatus();
         }
 
         public void GetName()
@@ -46,6 +41,80 @@ namespace HumaneSociety
                 {
                     Console.WriteLine("Please, enter an integer number for your age.");
                     inputAge = Console.ReadLine();
+                }
+            }
+        }
+
+        public void GetCatStatus()
+        {
+            Console.WriteLine("Do you have any cats at home? yes or no");
+            string yesOrNo = Console.ReadLine();
+            yesOrNo = CheckyesOrNo(yesOrNo);
+            if(yesOrNo == "yes")
+            {
+                hasCats = true;
+            }
+            else
+            {
+                hasCats = false;
+            }
+        }
+
+        public void GetDogStatus()
+        {
+            Console.WriteLine("Do you have any dogs at home? yes or no");
+            string yesOrNo = Console.ReadLine();
+            yesOrNo = CheckyesOrNo(yesOrNo);
+            if (yesOrNo == "yes")
+            {
+                hasDogs = true;
+            }
+            else
+            {
+                hasDogs = false;
+            }
+        }
+        public void GetKidStatus()
+        {
+            Console.WriteLine("Do you have any children? yes or no");
+            string yesOrNo = Console.ReadLine();
+            yesOrNo = CheckyesOrNo(yesOrNo);
+            if (yesOrNo == "yes")
+            {
+                hasKids = true;
+            }
+            else
+            {
+                hasKids = false;
+            }
+        }
+
+        public void GetFirstAnimalStatus()
+        {
+            Console.WriteLine("Have you ever had an animal before? yes or no");
+            string yesOrNo = Console.ReadLine();
+            yesOrNo = CheckyesOrNo(yesOrNo);
+            if (yesOrNo == "yes")
+            {
+                firstAnimal = true;
+            }
+            else
+            {
+                firstAnimal = false;
+            }
+        }
+        private string CheckyesOrNo(string yesOrNo)
+        {
+            while (true)
+            {
+                if (yesOrNo == "yes" || yesOrNo == "no")
+                {
+                    return yesOrNo;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please, choose yes or no.");
+                    yesOrNo = Console.ReadLine();
                 }
             }
         }

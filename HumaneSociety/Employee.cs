@@ -23,7 +23,7 @@ namespace HumaneSociety
         {
             LinqtoSQLDataContext add = new LinqtoSQLDataContext();
             add.Animals.InsertOnSubmit(animal);
-            //save feature for the database
+            add.SubmitChanges();
         }
 
         private bool CheckForAnimalShots(Animal animal)
@@ -77,7 +77,6 @@ namespace HumaneSociety
                     yesOrNo = Console.ReadLine();
                 }
             }
-
         }
         public void ChangeAnimalToAdopted(Customer adopter, Animal animal)
         {

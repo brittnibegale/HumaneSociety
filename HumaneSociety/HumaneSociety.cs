@@ -23,7 +23,12 @@ namespace HumaneSociety
         {
             Console.WriteLine("Welcome to the Humane Socitey! My name is {0}. Let's have you fill out an adoption applilcation.", brittni.name);
             Console.ReadLine();
-
+            adopter.GetName();
+            adopter.GetAge();
+            adopter.GetCatStatus();
+            adopter.GetDogStatus();
+            adopter.GetKidStatus();
+            adopter.GetFirstAnimalStatus();
         }
     }
 }
