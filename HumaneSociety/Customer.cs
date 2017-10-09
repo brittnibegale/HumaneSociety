@@ -8,17 +8,26 @@ namespace HumaneSociety
 {
     public class Customer
     {
-        MoneyBox wallet;
+        decimal wallet;
         string name;
         int age;
         bool hasCats;
         bool hasDogs;
         bool hasKids;
         bool firstAnimal;
+        public Adopter adopter;
 
         public Customer()
         {
-            wallet = new MoneyBox();
+            wallet = 300;
+            adopter = new Adopter();
+            adopter.Name = this.name;
+            adopter.Age = this.age;
+            adopter.Have_Cats = this.hasCats;
+            adopter.Have_Dogs = this.hasDogs;
+            adopter.Have_Kids = this.hasKids;
+            adopter.First_Animal = this.firstAnimal;
+            adopter.Wallet = this.wallet;
         }
 
         public void GetName()
@@ -50,7 +59,7 @@ namespace HumaneSociety
             Console.WriteLine("Do you have any cats at home? yes or no");
             string yesOrNo = Console.ReadLine();
             yesOrNo = CheckyesOrNo(yesOrNo);
-            if(yesOrNo == "yes")
+            if (yesOrNo == "yes")
             {
                 hasCats = true;
             }

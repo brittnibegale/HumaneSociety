@@ -36,7 +36,7 @@ namespace HumaneSociety
             bool hasShots = CheckForAnimalShots(animal);
             DoesAnimalNeedShots(adopter, hasShots);
             ChangeAnimalToAdopted(adopter, animal);
-            Console.WriteLine("Congrats on adopting the {0}! Thanks for supporting us! Have a great rest of your day!");
+            Console.WriteLine("Congrats on adopting the {0}! Thanks for supporting us! Have a great rest of your day!", animal.Breed);
             Console.ReadLine();
             Environment.Exit(0);
         }
@@ -58,7 +58,6 @@ namespace HumaneSociety
                     yesOrNo = Console.ReadLine().ToLower().Trim();
                     yesOrNo = CheckyesOrNo(yesOrNo);
                     SendBackToSearch(adopter, yesOrNo);
-                    //figure out what should happen next
                 }
 
             }
