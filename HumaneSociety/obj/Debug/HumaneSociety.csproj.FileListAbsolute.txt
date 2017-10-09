@@ -4,3 +4,4 @@ C:\Users\britt\Documents\devCode\Projects\HumaneSociety\HumaneSociety\bin\Debug\
 C:\Users\britt\Documents\devCode\Projects\HumaneSociety\HumaneSociety\bin\Debug\HumaneSociety.pdb
 C:\Users\britt\Documents\devCode\Projects\HumaneSociety\HumaneSociety\obj\Debug\HumaneSociety.exe
 C:\Users\britt\Documents\devCode\Projects\HumaneSociety\HumaneSociety\obj\Debug\HumaneSociety.pdb
+C:\Users\britt\Documents\devCode\Projects\HumaneSociety\HumaneSociety\obj\Debug\HumaneSociety.csprojResolveAssemblyReference.cache

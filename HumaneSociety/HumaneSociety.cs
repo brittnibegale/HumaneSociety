@@ -12,6 +12,7 @@ namespace HumaneSociety
         Employee brittni;
         Adopter adopter;
         Customer customer;
+        Animal animal;
         bool cats;
         bool dogs;
         bool kids;
@@ -29,6 +30,14 @@ namespace HumaneSociety
             GetAdoptersInformation();
             AddAdopterToDatabase();
             GetAdoptersFamilyInfo();
+            CompareAdopterCatInfoToAnimals();
+            CompareAdopterDogInfoToAnimals();
+            CompareAdopterKidInfoToAnimals();
+        }
+
+        public void GetAnimalInformation()
+        {
+            brittni.GetInformationAboutAnimal();
         }
         private void GetAdoptersInformation()
         {
@@ -40,6 +49,7 @@ namespace HumaneSociety
             customer.GetDogStatus();
             customer.GetKidStatus();
             customer.GetFirstAnimalStatus();
+            customer.CreateAdopter();
             adopter = customer.adopter;
         }
         private void AddAdopterToDatabase()
@@ -92,6 +102,35 @@ namespace HumaneSociety
             {
                 return false;
             }
+        }
+        private void CompareAdopterCatInfoToAnimals()
+        {
+            if(cats == true)
+            {
+                LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+                var result = compare.Animals.GroupBy(a => a.Likes_Cats).Select(i => i.ToList()).ToList();
+               
+            }
+
+        }
+    
+        private void CompareAdopterDogInfoToAnimals()
+        {
+            if(dogs == true)
+            {
+                LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+
+            }
+
+        }
+            private void CompareAdopterKidInfoToAnimals()
+        {
+            if(kids == true)
+            {
+                LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+
+            }
+
         }
     }
 }

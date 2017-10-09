@@ -12,13 +12,35 @@ namespace HumaneSociety
         string jobTitle;
         string yesOrNo;
         MoneyBox money;
+        Animal animal;
+        Pet pet;
         public Employee()
         {
             name = "Brittni";
             jobTitle = "Manager";
             money = new MoneyBox();
+            animal = new Animal();
+            pet = new Pet();
         }
-      
+      public void GetInformationAboutAnimal()
+        {
+            pet.GetAnimalType();
+            pet.GetBreed();
+            pet.GetFoodType();
+            pet.SetShots();
+            pet.GetAnimalSize();
+            pet.GetAnimalEnergyLevel();
+            pet.SetAnimalAdoptionStatus(false);
+            pet.SetAnimalKidsLikability();
+            pet.SetAnimalCatsLikability();
+            pet.SetAnimalDogsLikability();
+            pet.SetAnimalTraining();
+            pet.SetAnimalCost();
+            pet.SetAnimalFedStatus();
+            pet.CreateAnimal();
+            animal = pet.animals;
+            AddAnimalToDatabase(animal);
+        }
         public void AddAnimalToDatabase(Animal animal)
         {
             LinqtoSQLDataContext add = new LinqtoSQLDataContext();
@@ -28,8 +50,16 @@ namespace HumaneSociety
 
         private bool CheckForAnimalShots(Animal animal)
         {
-            bool hasShots = false;
-            return hasShots;
+            LinqtoSQLDataContext check = new LinqtoSQLDataContext();
+            var pet = check.Animals.Single(i => i.AnimalsID == animal.AnimalsID);
+            if(pet.Have_Shots == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public void AdoptionProcess(Customer adopter, Animal animal)
         {

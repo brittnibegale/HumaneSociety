@@ -20,14 +20,6 @@ namespace HumaneSociety
         public Customer()
         {
             wallet = 300;
-            adopter = new Adopter();
-            adopter.Name = this.name;
-            adopter.Age = this.age;
-            adopter.Have_Cats = this.hasCats;
-            adopter.Have_Dogs = this.hasDogs;
-            adopter.Have_Kids = this.hasKids;
-            adopter.First_Animal = this.firstAnimal;
-            adopter.Wallet = this.wallet;
         }
 
         public void GetName()
@@ -45,6 +37,7 @@ namespace HumaneSociety
                 if (Int32.TryParse(inputAge, out x))
                 {
                     age = x;
+                    break;
                 }
                 else
                 {
@@ -126,6 +119,17 @@ namespace HumaneSociety
                     yesOrNo = Console.ReadLine();
                 }
             }
+        }
+        public void CreateAdopter()
+        {
+            adopter = new Adopter();
+            adopter.Name = this.name;
+            adopter.Age = this.age;
+            adopter.Have_Cats = this.hasCats;
+            adopter.Have_Dogs = this.hasDogs;
+            adopter.Have_Kids = this.hasKids;
+            adopter.First_Animal = this.firstAnimal;
+            adopter.Wallet = this.wallet;
         }
 
         public void Search()
