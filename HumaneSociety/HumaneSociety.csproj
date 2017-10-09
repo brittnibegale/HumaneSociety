@@ -47,10 +47,10 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HumaneSociety.cs" />
-    <Compile Include="LinqtoSQL.designer.cs">
+    <Compile Include="LinqToSQL.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LinqtoSQL.dbml</DependentUpon>
+      <DependentUpon>LinqToSQL.dbml</DependentUpon>
     </Compile>
     <Compile Include="MoneyBox.cs" />
     <Compile Include="Pet.cs" />
@@ -64,9 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="LinqtoSQL.dbml">
+    <None Include="LinqToSQL.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>LinqtoSQL.designer.cs</LastGenOutput>
+      <LastGenOutput>LinqToSQL.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -78,8 +78,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LinqtoSQL.dbml.layout">
-      <DependentUpon>LinqtoSQL.dbml</DependentUpon>
+    <None Include="LinqToSQL.dbml.layout">
+      <DependentUpon>LinqToSQL.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

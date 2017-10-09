@@ -14,6 +14,8 @@ namespace HumaneSociety
         MoneyBox money;
         Animal animal;
         Pet pet;
+        Room room;
+        int count;
         public Employee()
         {
             name = "Brittni";
@@ -21,6 +23,8 @@ namespace HumaneSociety
             money = new MoneyBox();
             animal = new Animal();
             pet = new Pet();
+            room = new Room();
+            count = 1;
         }
       public void GetInformationAboutAnimal()
         {
@@ -41,16 +45,30 @@ namespace HumaneSociety
             animal = pet.animals;
             AddAnimalToDatabase(animal);
         }
+        public void GetRoomForAnimal()
+        {
+            room.RoomNumber = count;
+            room.Occupied = true;
+            room.AnimalsID = animal.AnimalsID;
+            AddAnimalToRoom();
+        }
+
+        public void AddAnimalToRoom()
+        {
+            LinqToSQLDataContext add = new LinqToSQLDataContext();
+            add.Rooms.InsertOnSubmit(room);
+            count++;
+        }
         public void AddAnimalToDatabase(Animal animal)
         {
-            LinqtoSQLDataContext add = new LinqtoSQLDataContext();
+            LinqToSQLDataContext add = new LinqToSQLDataContext();
             add.Animals.InsertOnSubmit(animal);
             add.SubmitChanges();
         }
 
         private bool CheckForAnimalShots(Animal animal)
         {
-            LinqtoSQLDataContext check = new LinqtoSQLDataContext();
+            LinqToSQLDataContext check = new LinqToSQLDataContext();
             var pet = check.Animals.Single(i => i.AnimalsID == animal.AnimalsID);
             if(pet.Have_Shots == true)
             {
@@ -89,7 +107,6 @@ namespace HumaneSociety
                     yesOrNo = CheckyesOrNo(yesOrNo);
                     SendBackToSearch(adopter, yesOrNo);
                 }
-
             }
         }
         private string CheckyesOrNo(string yesOrNo)

@@ -11,7 +11,7 @@ namespace HumaneSociety
         static void Main(string[] args)
         {
             HumaneSociety first = new HumaneSociety();
-            first.GetAnimalInformation();
+            first.OpenHumaneSociety();
         }
     }
 }

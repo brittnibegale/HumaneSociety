@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HumaneSociety" Class="LinqtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HumaneSociety" Class="LinqToSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-7V83TKI;Initial Catalog=HumaneSociety;Integrated Security=True" SettingsObjectName="HumaneSociety.Properties.Settings" SettingsPropertyName="HumaneSocietyConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Adopter" Member="Adopters">
     <Type Name="Adopter">
@@ -23,7 +23,6 @@
       <Column Name="Adoption_Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="AdopterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Animal_Size" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Food_Needed" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Energy_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Likes_Kids" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Likes_Cats" Type="System.Boolean" DbType="Bit" CanBeNull="true" />

@@ -8,18 +8,20 @@ namespace HumaneSociety
 {
     public class HumaneSociety
     {
-        LinqtoSQLDataContext first;
+        LinqToSQLDataContext first;
         Employee brittni;
         Adopter adopter;
         Customer customer;
         Animal animal;
+        List<Animal> possiblePets;
         bool cats;
         bool dogs;
         bool kids;
+        
 
         public HumaneSociety()
         {
-            first = new LinqtoSQLDataContext();
+            first = new LinqToSQLDataContext();
             brittni = new Employee();
             adopter = new Adopter();
             customer = new Customer();
@@ -38,6 +40,7 @@ namespace HumaneSociety
         public void GetAnimalInformation()
         {
             brittni.GetInformationAboutAnimal();
+            brittni.GetRoomForAnimal();
         }
         private void GetAdoptersInformation()
         {
@@ -54,7 +57,7 @@ namespace HumaneSociety
         }
         private void AddAdopterToDatabase()
         {
-            LinqtoSQLDataContext addAdopter = new LinqtoSQLDataContext();
+            LinqToSQLDataContext addAdopter = new LinqToSQLDataContext();
             addAdopter.Adopters.InsertOnSubmit(adopter);
             addAdopter.SubmitChanges();
         }
@@ -66,7 +69,7 @@ namespace HumaneSociety
         }
         private bool GetAdoptersCatStatus()
         {
-            LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+            LinqToSQLDataContext compare = new LinqToSQLDataContext();
             var person = compare.Adopters.Single(i => i.Name == adopter.Name);
             if(person.Have_Cats == true)
             {
@@ -79,7 +82,7 @@ namespace HumaneSociety
         }
         private bool GetAdoptersDogStatus()
         {
-            LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+            LinqToSQLDataContext compare = new LinqToSQLDataContext();
             var person = compare.Adopters.Single(i => i.Name == adopter.Name);
             if (person.Have_Dogs == true)
             {
@@ -92,7 +95,7 @@ namespace HumaneSociety
         }
         private bool GetAdoptersKidStatus()
         {
-            LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+            LinqToSQLDataContext compare = new LinqToSQLDataContext();
             var person = compare.Adopters.Single(i => i.Name == adopter.Name);
             if (person.Have_Kids == true)
             {
@@ -107,30 +110,64 @@ namespace HumaneSociety
         {
             if(cats == true)
             {
-                LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
-                var result = compare.Animals.GroupBy(a => a.Likes_Cats).Select(i => i.ToList()).ToList();
-               
+                LinqToSQLDataContext compare = new LinqToSQLDataContext();
+                possiblePets = new List<Animal>();
+                var catResult = compare.Animals.GroupBy(a => a.Likes_Cats).ToList();
+                if (catResult.Count < 1)
+                {
+                    possiblePets = catResult[1].ToList();
+                }
+                else
+                {
+                    Console.WriteLine("We are sorry, but the current animals in our database do not get along with cats. \n Please, come again soon to see if we have gotten something that suits your family needs! Have a great day.");
+                    Console.ReadLine();
+                    Environment.Exit(0);
+                }
             }
-
         }
     
         private void CompareAdopterDogInfoToAnimals()
         {
             if(dogs == true)
             {
-                LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
+                List<Animal> tempAnimalList = new List<Animal>();
 
+                foreach (var pet in possiblePets)
+                {
+                    if(animal.Likes_Dogs == true)
+                    {
+                        tempAnimalList.Add(pet);
+                    }
+                }
+              possiblePets = tempAnimalList;
             }
-
+            CheckListCount(possiblePets);
         }
-            private void CompareAdopterKidInfoToAnimals()
+        private void CompareAdopterKidInfoToAnimals()
         {
             if(kids == true)
             {
-                LinqtoSQLDataContext compare = new LinqtoSQLDataContext();
-
+                List<Animal> tempAnimalList = new List<Animal>();
+                foreach (var pet in possiblePets)
+                {
+                    if (animal.Likes_Kids == true)
+                    {
+                        tempAnimalList.Add(pet);
+                    }
+                }
+                possiblePets = tempAnimalList;
             }
+            CheckListCount(possiblePets);
+        }
 
+        private void CheckListCount(List<Animal> pet)
+        {
+            if(pet.Count < 1)
+            {
+                Console.WriteLine("Currently, there are no animals at our shelter that fit your family profile. \n Please, come back soon to check if we have gotten an animal that would fit your family!");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
         }
     }
 }

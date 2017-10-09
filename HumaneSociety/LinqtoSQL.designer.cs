@@ -23,7 +23,7 @@ namespace HumaneSociety
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="HumaneSociety")]
-	public partial class LinqtoSQLDataContext : System.Data.Linq.DataContext
+	public partial class LinqToSQLDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -44,31 +44,31 @@ namespace HumaneSociety
     partial void DeleteRoom(Room instance);
     #endregion
 		
-		public LinqtoSQLDataContext() : 
+		public LinqToSQLDataContext() : 
 				base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqtoSQLDataContext(string connection) : 
+		public LinqToSQLDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqtoSQLDataContext(System.Data.IDbConnection connection) : 
+		public LinqToSQLDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqtoSQLDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public LinqToSQLDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public LinqtoSQLDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public LinqToSQLDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -387,8 +387,6 @@ namespace HumaneSociety
 		
 		private string _Animal_Size;
 		
-		private System.Nullable<int> _Food_Needed;
-		
 		private string _Energy_Type;
 		
 		private System.Nullable<bool> _Likes_Kids;
@@ -429,8 +427,6 @@ namespace HumaneSociety
     partial void OnAdopterIDChanged();
     partial void OnAnimal_SizeChanging(string value);
     partial void OnAnimal_SizeChanged();
-    partial void OnFood_NeededChanging(System.Nullable<int> value);
-    partial void OnFood_NeededChanged();
     partial void OnEnergy_TypeChanging(string value);
     partial void OnEnergy_TypeChanged();
     partial void OnLikes_KidsChanging(System.Nullable<bool> value);
@@ -619,26 +615,6 @@ namespace HumaneSociety
 					this._Animal_Size = value;
 					this.SendPropertyChanged("Animal_Size");
 					this.OnAnimal_SizeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_Needed", DbType="Int")]
-		public System.Nullable<int> Food_Needed
-		{
-			get
-			{
-				return this._Food_Needed;
-			}
-			set
-			{
-				if ((this._Food_Needed != value))
-				{
-					this.OnFood_NeededChanging(value);
-					this.SendPropertyChanging();
-					this._Food_Needed = value;
-					this.SendPropertyChanged("Food_Needed");
-					this.OnFood_NeededChanged();
 				}
 			}
 		}
