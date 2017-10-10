@@ -13,7 +13,8 @@ namespace HumaneSociety
         Adopter adopter;
         Customer customer;
         Animal animal;
-        List<Animal> possiblePets;
+        List<Animal>possiblePets;
+        List<Animal> intialPossiblePets;
         bool cats;
         bool dogs;
         bool kids;
@@ -25,16 +26,56 @@ namespace HumaneSociety
             brittni = new Employee();
             adopter = new Adopter();
             customer = new Customer();
-
+            animal = new Animal();
         }
         public void OpenHumaneSociety()
         {
-            GetAdoptersInformation();
-            AddAdopterToDatabase();
-            GetAdoptersFamilyInfo();
-            CompareAdopterCatInfoToAnimals();
-            CompareAdopterDogInfoToAnimals();
-            CompareAdopterKidInfoToAnimals();
+            FindCustomersAction();
+        }
+        public void FindCustomersAction()
+        {
+            Console.WriteLine("Welcome to the Humane Society! My name is {0}. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off");
+            string choice = Console.ReadLine().ToLower();
+            choice = CheckChoice(choice);
+            CreateCustomerPath(choice);
+        }
+        private string CheckChoice(string choice)
+        {
+            while (true)
+            {
+                if(choice == "adopt" || choice == "drop off")
+                {
+                    return choice;
+                }
+                else
+                {
+                    Console.WriteLine("Please choose: adopt or drop off");
+                    choice = Console.ReadLine().ToLower();
+                }
+            }
+        }
+
+        private void CreateCustomerPath(string choice)
+        {
+            switch (choice)
+            {
+                case "adopt":
+                    SetAdoptersInformation();
+                    Console.Clear();
+                    AddAdopterToDatabase();
+                    GetAdoptersFamilyInfo();
+                    CompareAdopterCatInfoToAnimals();
+                    CompareAdopterDogInfoToAnimals();
+                    CompareAdopterKidInfoToAnimals();
+                    DisplayPossiblePets();
+                    animal = customer.Search(possiblePets);
+                    break;
+                case "drop off":
+                    GetAnimalInformation();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void GetAnimalInformation()
@@ -42,9 +83,9 @@ namespace HumaneSociety
             brittni.GetInformationAboutAnimal();
             brittni.GetRoomForAnimal();
         }
-        private void GetAdoptersInformation()
+        private void SetAdoptersInformation()
         {
-            Console.WriteLine("Welcome to the Humane Socitey! My name is {0}. Let's have you fill out an adoption applilcation.", brittni.name);
+            Console.WriteLine("My name is {0}. Let's have you fill out an adoption applilcation.", brittni.name);
             Console.ReadLine();
             customer.GetName();
             customer.GetAge();
@@ -111,15 +152,15 @@ namespace HumaneSociety
             if(cats == true)
             {
                 LinqToSQLDataContext compare = new LinqToSQLDataContext();
-                possiblePets = new List<Animal>();
+                intialPossiblePets = new List<Animal>();
                 var catResult = compare.Animals.GroupBy(a => a.Likes_Cats).ToList();
                 if (catResult.Count < 1)
                 {
-                    possiblePets = catResult[1].ToList();
+                    intialPossiblePets = catResult[1].ToList();
                 }
                 else
                 {
-                    Console.WriteLine("We are sorry, but the current animals in our database do not get along with cats. \n Please, come again soon to see if we have gotten something that suits your family needs! Have a great day.");
+                    Console.WriteLine("We are sorry, but the current animals in our database do not get along with cats. \n Please, come again soon to see if we have gotten an animal that suits your family needs! Have a great day.");
                     Console.ReadLine();
                     Environment.Exit(0);
                 }
@@ -131,6 +172,8 @@ namespace HumaneSociety
             if(dogs == true)
             {
                 List<Animal> tempAnimalList = new List<Animal>();
+                possiblePets = new List<Animal>();
+                possiblePets = intialPossiblePets;
 
                 foreach (var pet in possiblePets)
                 {
@@ -168,6 +211,17 @@ namespace HumaneSociety
                 Console.ReadLine();
                 Environment.Exit(0);
             }
+        }
+        private void DisplayPossiblePets()
+        {
+            int count = 1;
+            Console.WriteLine("Here is a list of the animals that fit your family.");
+            foreach(var animal in possiblePets)
+            {
+                Console.WriteLine("{0}. {1} of {2} breed.", count, animal.Animal1, animal.Breed);
+                count++;
+            }
+            Console.ReadLine();
         }
     }
 }
