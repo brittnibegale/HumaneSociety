@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSVFile.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HumaneSociety.cs" />
+    <Compile Include="IimportFile.cs" />
     <Compile Include="LinqToSQL.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

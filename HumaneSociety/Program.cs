@@ -10,7 +10,8 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            HumaneSociety first = new HumaneSociety();
+            CSVFile file = new CSVFile();
+            HumaneSociety first = new HumaneSociety(file);
             first.OpenHumaneSociety();
         }
     }

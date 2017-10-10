@@ -14,7 +14,6 @@ namespace HumaneSociety
         MoneyBox money;
         Animal animal;
         Pet pet;
-        Room room;
         int count;
         public Employee()
         {
@@ -23,10 +22,9 @@ namespace HumaneSociety
             money = new MoneyBox();
             animal = new Animal();
             pet = new Pet();
-            room = new Room();
             count = 1;
         }
-      public void GetInformationAboutAnimal()
+      public Animal GetInformationAboutAnimal()
         {
             pet.GetAnimalType();
             pet.GetBreed();
@@ -44,22 +42,23 @@ namespace HumaneSociety
             pet.CreateAnimal();
             animal = pet.animals;
             AddAnimalToDatabase(animal);
-            ThankPerson();
+            return animal;
         }
-        private void ThankPerson()
+        public void ThankPerson()
         {
             Console.WriteLine("Thank you for working with us. I ensure you that we will take great care of your animal.");
             Console.ReadLine();
             Environment.Exit(0);
         }
-        public void GetRoomForAnimal()
+        public void GetRoomForAnimal(Animal animals)
         {
+            Room room = new Room();
             room.RoomNumber = count;
             room.Occupied = true;
-            room.AnimalsID = animal.AnimalsID;
-            AddAnimalToRoom();
+            room.AnimalsID = animals.AnimalsID;
+            AddAnimalToRoom(room);
         }
-        public void AddAnimalToRoom()
+        public void AddAnimalToRoom(Room room)
         {
             LinqToSQLDataContext add = new LinqToSQLDataContext();
             add.Rooms.InsertOnSubmit(room);

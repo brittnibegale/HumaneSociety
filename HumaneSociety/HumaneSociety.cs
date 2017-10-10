@@ -18,14 +18,16 @@ namespace HumaneSociety
         bool cats;
         bool dogs;
         bool kids;
+        IimportFile file;
 
-        public HumaneSociety()
+        public HumaneSociety(IimportFile file)
         {
             first = new LinqToSQLDataContext();
             brittni = new Employee();
             adopter = new Adopter();
             customer = new Customer();
             animal = new Animal();
+            this.file = file;
         }
         public void OpenHumaneSociety()
         {
@@ -33,7 +35,7 @@ namespace HumaneSociety
         }
         public void FindCustomersAction()
         {
-            Console.WriteLine("Welcome to the Humane Society! My name is {0}. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off");
+            Console.WriteLine("Welcome to the Humane Society! My name is {0}. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off",brittni.name);
             string choice = Console.ReadLine().ToLower();
             choice = CheckChoice(choice);
             CreateCustomerPath(choice);
@@ -70,16 +72,54 @@ namespace HumaneSociety
                     brittni.AdoptionProcess(customer, animal);
                     break;
                 case "drop off":
-                    GetAnimalInformation();
+                    string typeOfDropOff = GetTypeOfDropOff();
+                    if(typeOfDropOff == "own animal")
+                    {
+                        GetAnimalInformation();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Great, I see we have recieved your file of all the animals that are coming to our shelter.\n Let me process this and then you can be on your way!");
+                        Console.ReadLine();
+                        file.UploadFile(brittni);
+                        Console.WriteLine("Looks like everything processed. Have a great day!");
+                        Console.ReadLine();
+                        Environment.Exit(0);
+                    }
                     break;
                 default:
                     break;
             }
         }
-        public void GetAnimalInformation()
+        private string GetTypeOfDropOff()
         {
-            brittni.GetInformationAboutAnimal();
-            brittni.GetRoomForAnimal();
+            Console.WriteLine("Are you here to drop off your own animal or a group of animals from another shelter? \n Please, choose: own animal or shelter animals");
+            string typeOfDropOff = Console.ReadLine().ToLower().Trim();
+            typeOfDropOff = CheckTypeOfDropOff(typeOfDropOff);
+            return typeOfDropOff;
+        }
+
+        private string CheckTypeOfDropOff(string typeOfDropOff)
+        {
+            while (true)
+            {
+                if(typeOfDropOff == "own animal" || typeOfDropOff == "shelter animals")
+                {
+                    return typeOfDropOff;
+                }
+                else
+                {
+                    Console.WriteLine("Invaild input. Please, choose either own animal or shelter animals.");
+                    typeOfDropOff = Console.ReadLine().ToLower().Trim();
+                }
+            }
+        }
+        private void GetAnimalInformation()
+        {
+            Animal animal;
+            animal = brittni.GetInformationAboutAnimal();
+            brittni.GetRoomForAnimal(animal);
+            brittni.ThankPerson();
         }
         private void SetAdoptersInformation()
         {
