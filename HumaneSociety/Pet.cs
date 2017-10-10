@@ -41,7 +41,6 @@ namespace HumaneSociety
                 if (animalType == "dog" || animalType == "cat" || animalType == "reptile" || animalType == "rodent" || animalType == "bird")
                 {
                     return animalType;
-                    break;
                 }
                 else
                 {
@@ -105,7 +104,6 @@ namespace HumaneSociety
                 if (size == "extra small" || size == "small" || size == "medium" || size == "large" || size == "extra large")
                 {
                     return size;
-                    break;
                 }
                 else
                 {
@@ -114,7 +112,6 @@ namespace HumaneSociety
                 }
             }
         }
-
         public void GetAnimalEnergyLevel()
         {
             Console.WriteLine("Does your {0} have a lot of energy? yes or no", animal);
@@ -255,7 +252,6 @@ namespace HumaneSociety
             {
                 fed_Today = false;
             }
-
         }
         public void CreateAnimal()
         {
@@ -289,7 +285,5 @@ namespace HumaneSociety
                 }
             }
         }
-
-
     }
 }

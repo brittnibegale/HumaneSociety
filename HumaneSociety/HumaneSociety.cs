@@ -18,7 +18,6 @@ namespace HumaneSociety
         bool cats;
         bool dogs;
         bool kids;
-        
 
         public HumaneSociety()
         {
@@ -54,7 +53,6 @@ namespace HumaneSociety
                 }
             }
         }
-
         private void CreateCustomerPath(string choice)
         {
             switch (choice)
@@ -69,6 +67,7 @@ namespace HumaneSociety
                     CompareAdopterKidInfoToAnimals();
                     DisplayPossiblePets();
                     animal = customer.Search(possiblePets);
+                    brittni.AdoptionProcess(customer, animal);
                     break;
                 case "drop off":
                     GetAnimalInformation();
@@ -77,7 +76,6 @@ namespace HumaneSociety
                     break;
             }
         }
-
         public void GetAnimalInformation()
         {
             brittni.GetInformationAboutAnimal();
@@ -149,10 +147,11 @@ namespace HumaneSociety
         }
         private void CompareAdopterCatInfoToAnimals()
         {
-            if(cats == true)
+            intialPossiblePets = new List<Animal>();
+
+            if (cats == true)
             {
                 LinqToSQLDataContext compare = new LinqToSQLDataContext();
-                intialPossiblePets = new List<Animal>();
                 var catResult = compare.Animals.GroupBy(a => a.Likes_Cats).ToList();
                 if (catResult.Count < 1)
                 {
@@ -165,16 +164,23 @@ namespace HumaneSociety
                     Environment.Exit(0);
                 }
             }
+            else
+            {
+                LinqToSQLDataContext create = new LinqToSQLDataContext();
+                var animals = create.Animals.Select(animal => animal);
+                foreach(var animal in animals)
+                {
+                    intialPossiblePets.Add(animal);
+                }
+            }
         }
-    
         private void CompareAdopterDogInfoToAnimals()
         {
-            if(dogs == true)
+            possiblePets = new List<Animal>();
+            possiblePets = intialPossiblePets;
+            if (dogs == true)
             {
                 List<Animal> tempAnimalList = new List<Animal>();
-                possiblePets = new List<Animal>();
-                possiblePets = intialPossiblePets;
-
                 foreach (var pet in possiblePets)
                 {
                     if(animal.Likes_Dogs == true)
@@ -202,7 +208,6 @@ namespace HumaneSociety
             }
             CheckListCount(possiblePets);
         }
-
         private void CheckListCount(List<Animal> pet)
         {
             if(pet.Count < 1)

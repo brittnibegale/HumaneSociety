@@ -8,7 +8,7 @@ namespace HumaneSociety
 {
     public class Customer
     {
-        decimal wallet;
+        decimal wallet = 0;
         string name;
         int age;
         bool hasCats;
@@ -48,7 +48,6 @@ namespace HumaneSociety
                 }
             }
         }
-
         public void GetCatStatus()
         {
             Console.WriteLine("Do you have any cats at home? yes or no");
@@ -63,7 +62,6 @@ namespace HumaneSociety
                 hasCats = false;
             }
         }
-
         public void GetDogStatus()
         {
             Console.WriteLine("Do you have any dogs at home? yes or no");
@@ -92,7 +90,6 @@ namespace HumaneSociety
                 hasKids = false;
             }
         }
-
         public void GetFirstAnimalStatus()
         {
             Console.WriteLine("Have you ever had an animal before? yes or no");
@@ -133,12 +130,13 @@ namespace HumaneSociety
             adopter.First_Animal = this.firstAnimal;
             adopter.Wallet = this.wallet;
         }
-
-        public void Pay(decimal money)
+        public void Pay(decimal cost)
         {
             LinqToSQLDataContext remove = new LinqToSQLDataContext();
-            var wallet = remove.Adopters.Single(i => i.Name == adopter.Name);
-
+            var person = remove.Adopters.Single(i => i.Name == adopter.Name);
+            decimal money = wallet - cost;
+            person.Wallet = money;
+            remove.SubmitChanges();
         }
         public Animal Search(List<Animal> possiblePets)
         {
@@ -170,7 +168,6 @@ namespace HumaneSociety
             }
             return searchedAnimals;
         }
-
         private List<Animal> SearchByType(List<Animal> possiblePets)
         {
             List<Animal> searchedAnimals = new List<Animal>();
@@ -224,7 +221,6 @@ namespace HumaneSociety
             CheckCount(searchedAnimals);
             return searchedAnimals;
         }
-
         private string CheckSearch(string userSearchInput)
         {
             while (true)
@@ -240,7 +236,6 @@ namespace HumaneSociety
                 }
             }
         }
-
         private string CheckTypeChoice(string typeChoice)
         {
             while (true)
@@ -270,11 +265,10 @@ namespace HumaneSociety
                     typeChoice = Console.ReadLine().ToLower();
                 }
             }
-
         }
         private int CheckCount(List<Animal> possibleAnimals)
         {
-            if(possibleAnimals.Count < 1)
+            if(possibleAnimals.Count <= 1)
             {
                 Console.WriteLine("There are no animals that meet your search. Please, come back soon and check if we have the animal that fits your family!");
                 Console.ReadLine();
@@ -320,6 +314,7 @@ namespace HumaneSociety
             Console.WriteLine("Please, type the number associated with the animal you would like. \n Example: 1. Dog of Corgi breed. You would type 1. \n Please, choose a number less than {0}", count);
             string numberChoice = Console.ReadLine();
             number = CheckNumberValidity(numberChoice, count);
+            number = number - 1;
             pet = possibleAnimals[number];
             return pet;
         }
@@ -328,10 +323,8 @@ namespace HumaneSociety
             while (true)
             {
                 int number;
-                if (!(Int32.TryParse(numberChoice, out number)))
+                if (Int32.TryParse(numberChoice, out number))
                 {
-                    Console.WriteLine("Please, enter an integer number for your choice. Less than {0}.", count);
-                    numberChoice = Console.ReadLine();
                     if (number > count)
                     {
                         Console.WriteLine("Please, choose an animal from the list above with a corresponding number less than {0}.", count);
@@ -341,6 +334,11 @@ namespace HumaneSociety
                     {
                         return number;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Please, enter an integer number for your choice. Less than {0}.", count);
+                    numberChoice = Console.ReadLine();
                 }
             }
         }

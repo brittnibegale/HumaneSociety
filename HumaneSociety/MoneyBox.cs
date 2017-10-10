@@ -13,14 +13,9 @@ namespace HumaneSociety
         {
             money = 300;
         }
-        public void RemoveMoney(decimal cash)
-        {
-
-        }
-
         public void AddMoney(decimal cash)
         {
-
+            money = money + cash;
         }
     }
 }

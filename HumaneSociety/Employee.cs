@@ -59,7 +59,6 @@ namespace HumaneSociety
             room.AnimalsID = animal.AnimalsID;
             AddAnimalToRoom();
         }
-
         public void AddAnimalToRoom()
         {
             LinqToSQLDataContext add = new LinqToSQLDataContext();
@@ -73,7 +72,6 @@ namespace HumaneSociety
             add.Animals.InsertOnSubmit(animal);
             add.SubmitChanges();
         }
-
         private bool CheckForAnimalShots(Animal animal)
         {
             LinqToSQLDataContext check = new LinqToSQLDataContext();
@@ -96,7 +94,6 @@ namespace HumaneSociety
             Console.ReadLine();
             Environment.Exit(0);
         }
-
         private void DoesAnimalNeedShots(Customer adopter, bool hasShots)
         {
             if (!(hasShots == true))
@@ -110,10 +107,19 @@ namespace HumaneSociety
                 }
                 else
                 {
-                    Console.WriteLine("I am sorry, but to take this animal home you need to buy their shots first. \n Would you like to search for an animal again? yes or no");
+                    Console.WriteLine("I am sorry, but to take this animal home you need to buy their shots first. \n Are you sure you don't want to pay $30? yes or no");
                     yesOrNo = Console.ReadLine().ToLower().Trim();
                     yesOrNo = CheckyesOrNo(yesOrNo);
-                    SendBackToSearch(adopter, yesOrNo);
+                    if(yesOrNo == "yes")
+                    {
+                        Console.WriteLine("Thank you for coming in today. Please, check back soon to see if there are any animals that fit your family!");
+                        Console.ReadLine();
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        TakeCustomersMoney(30, adopter);
+                    }
                 }
             }
         }
@@ -140,26 +146,10 @@ namespace HumaneSociety
             pet.AdopterID = customer.adopter.AdopterID;
             change.SubmitChanges();
         }
-
-        private void SendBackToSearch(Customer adopter, string yesOrNo)
-        {
-            if(yesOrNo == "yes")
-            {
-                //adopter.Search();
-            }
-            else
-            {
-                Console.WriteLine("Thank you for stopping in today to check out our humane society! \n Keep checking in to see if we get an animal you would like to add to your family!");
-                Console.ReadLine();
-                Environment.Exit(0);
-            }
-        }
-       
         public void TakeCustomersMoney(decimal cash, Customer adopter)
         {
             money.AddMoney(cash);
             adopter.Pay(cash);
         }
-
     }
 }
