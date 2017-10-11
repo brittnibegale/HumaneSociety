@@ -1,0 +1,51 @@
+CREATE TABLE dbo.Animals
+(
+AnimalsID int IDENTITY (1,1) PRIMARY KEY,
+Animal varchar(50) NOT NULL,
+Breed varchar(50) NOT NULL,
+FoodID int,
+Foreign Key(FoodID) References dbo.Food(FoodID),
+Have_Shots bit,
+Adoption_Status bit,
+AdopterID int,
+Foreign Key(AdopterID) References dbo.Adopter(AdopterID),
+Animal_Size varchar(50) NOT NULL,
+Energy_Type varchar(50),
+Likes_Kids bit,
+Likes_Cats bit,
+Likes_Dogs bit,
+Trained bit,
+Cost money,
+Fed_Today bit,
+Food_Amount int,
+);
+
+CREATE TABLE dbo.Adopter
+(
+AdopterID int IDENTITY(1,1) PRIMARY KEY,
+Name varchar(50) NOT NULL,
+Age int,
+Have_Cats bit,
+Have_Dogs bit,
+Have_Kids bit,
+First_Animal bit,
+Wallet money,
+);
+
+CREATE TABLE dbo.Food 
+(
+FoodID int IDENTITY (1,1) PRIMARY KEY,
+Food_Type varchar(50) NOT NULL,
+);
+
+CREATE TABLE dbo.Rooms
+(
+RoomsID int IDENTITY(1,1) PRIMARY KEY,
+RoomNumber int,
+Occupied bit,
+AnimalsID int,
+Foreign Key(AnimalsID) References dbo.Adopter(AnimalsID),
+);
+
+
+
