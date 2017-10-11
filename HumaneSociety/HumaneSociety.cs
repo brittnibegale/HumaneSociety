@@ -159,7 +159,7 @@ namespace HumaneSociety
         private bool GetAdoptersCatStatus()
         {
             LinqToSQLDataContext compare = new LinqToSQLDataContext();
-            var person = compare.Adopters.Single(i => i.Name == adopter.Name);
+            var person = compare.Adopters.Single(i => i.AdopterID == adopter.AdopterID);
             if(person.Have_Cats == true)
             {
                 return true;
