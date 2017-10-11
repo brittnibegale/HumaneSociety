@@ -38,7 +38,7 @@ namespace HumaneSociety
         }
         public void FindCustomersAction()
         {
-            Console.WriteLine("Welcome to the Humane Society! My name is {0}. I am the {1} of the Humane Society. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off",owner.name, owner.jobTitle);
+            Console.WriteLine("Welcome to The Best Humane Society! My name is {0}. I am the {1} of the humane society. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off",owner.name, owner.jobTitle);
             string choice = Console.ReadLine().ToLower();
             choice = CheckChoice(choice);
             CreateCustomerPath(choice);
