@@ -30,6 +30,7 @@
       <Column Name="Trained" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Cost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="Fed_Today" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Food_Amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Animal_Room" Member="Rooms" ThisKey="AnimalsID" OtherKey="AnimalsID" Type="Room" />
       <Association Name="Adopter_Animal" Member="Adopter" ThisKey="AdopterID" OtherKey="AdopterID" Type="Adopter" IsForeignKey="true" />
       <Association Name="Food_Animal" Member="Food" ThisKey="FoodID" OtherKey="FoodID" Type="Food" IsForeignKey="true" />

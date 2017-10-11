@@ -401,6 +401,8 @@ namespace HumaneSociety
 		
 		private System.Nullable<bool> _Fed_Today;
 		
+		private System.Nullable<int> _Food_Amount;
+		
 		private EntitySet<Room> _Rooms;
 		
 		private EntityRef<Adopter> _Adopter;
@@ -441,6 +443,8 @@ namespace HumaneSociety
     partial void OnCostChanged();
     partial void OnFed_TodayChanging(System.Nullable<bool> value);
     partial void OnFed_TodayChanged();
+    partial void OnFood_AmountChanging(System.Nullable<int> value);
+    partial void OnFood_AmountChanged();
     #endregion
 		
 		public Animal()
@@ -755,6 +759,26 @@ namespace HumaneSociety
 					this._Fed_Today = value;
 					this.SendPropertyChanged("Fed_Today");
 					this.OnFed_TodayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Food_Amount", DbType="Int")]
+		public System.Nullable<int> Food_Amount
+		{
+			get
+			{
+				return this._Food_Amount;
+			}
+			set
+			{
+				if ((this._Food_Amount != value))
+				{
+					this.OnFood_AmountChanging(value);
+					this.SendPropertyChanging();
+					this._Food_Amount = value;
+					this.SendPropertyChanged("Food_Amount");
+					this.OnFood_AmountChanged();
 				}
 			}
 		}
