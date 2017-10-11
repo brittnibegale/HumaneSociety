@@ -59,6 +59,8 @@ namespace HumaneSociety
             Console.Clear();
             pet.SetAnimalFedStatus();
             Console.Clear();
+            pet.SetFoodAmount();
+            Console.Clear();
             pet.CreateAnimal();
             animal = pet.animals;
             AddAnimalToDatabase(animal);

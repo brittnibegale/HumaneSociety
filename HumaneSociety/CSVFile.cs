@@ -35,6 +35,7 @@ namespace HumaneSociety
                 animal.Trained = Convert.ToBoolean(line[10]);
                 animal.Cost = Decimal.Parse(line[11]);
                 animal.Fed_Today = Convert.ToBoolean(line[12]);
+                animal.Food_Amount = Int32.Parse(line[13]);
 
                 add.Animals.InsertOnSubmit(animal);
                 add.SubmitChanges();

@@ -21,6 +21,7 @@ namespace HumaneSociety
         bool trained;
         decimal cost;
         bool fed_Today;
+        int food_Amount;
         string yesOrNo;
         public Animal animals;
 
@@ -253,6 +254,26 @@ namespace HumaneSociety
                 fed_Today = false;
             }
         }
+        public void SetFoodAmount()
+        {
+            Console.WriteLine("How much food does your animal eat every day?");
+            string food = Console.ReadLine();
+            int foods;
+            while (true)
+            {
+                bool number = Int32.TryParse(food, out foods);
+                if (number == true)
+                {
+                    food_Amount = foods * 7;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please, enter an integer number.");
+                    food = Console.ReadLine();
+                }
+            }
+        }
         public void CreateAnimal()
         {
             animals = new Animal();
@@ -269,6 +290,7 @@ namespace HumaneSociety
             animals.Trained = this.trained;
             animals.Cost = this.cost;
             animals.Fed_Today = this.fed_Today;
+            animals.Food_Amount = this.food_Amount;
         }
         private string CheckyesOrNo(string yesOrNo)
         {
