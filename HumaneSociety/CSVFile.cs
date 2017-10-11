@@ -15,8 +15,7 @@ namespace HumaneSociety
         {
 
         }
-
-        public void UploadFile(Employee employee)
+        public void UploadFile(AnimalIntakeManager intakeManager)
         {
             LinqToSQLDataContext add = new LinqToSQLDataContext();
             var animalData = File.ReadLines(path).Select(path => path.Split(',')).ToList();
@@ -39,7 +38,7 @@ namespace HumaneSociety
 
                 add.Animals.InsertOnSubmit(animal);
                 add.SubmitChanges();
-                employee.GetRoomForAnimal(animal);
+                intakeManager.GetRoomForAnimal(animal);
             }
         }
     }

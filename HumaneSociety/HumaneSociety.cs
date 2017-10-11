@@ -8,8 +8,10 @@ namespace HumaneSociety
 {
     public class HumaneSociety
     {
-        LinqToSQLDataContext first;
-        Employee brittni;
+        Employee employee = new Employee();
+        Owner owner;
+        AdoptionManager adoptionManager;
+        AnimalIntakeManager intakeManager;
         Adopter adopter;
         Customer customer;
         Animal animal;
@@ -22,8 +24,9 @@ namespace HumaneSociety
 
         public HumaneSociety(IimportFile file)
         {
-            first = new LinqToSQLDataContext();
-            brittni = new Employee();
+            owner = new Owner();
+            adoptionManager = new AdoptionManager();
+            intakeManager = new AnimalIntakeManager();
             adopter = new Adopter();
             customer = new Customer();
             animal = new Animal();
@@ -35,7 +38,7 @@ namespace HumaneSociety
         }
         public void FindCustomersAction()
         {
-            Console.WriteLine("Welcome to the Humane Society! My name is {0}. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off",brittni.name);
+            Console.WriteLine("Welcome to the Humane Society! My name is {0}. I am the {1} of the Humane Society. Are you looking to adopt today or are you here to drop off an animal? \n Please choose: adopt or drop off",owner.name, owner.jobTitle);
             string choice = Console.ReadLine().ToLower();
             choice = CheckChoice(choice);
             CreateCustomerPath(choice);
@@ -61,27 +64,34 @@ namespace HumaneSociety
             {
                 case "adopt":
                     SetAdoptersInformation();
-                    Console.Clear();
                     AddAdopterToDatabase();
                     GetAdoptersFamilyInfo();
                     CompareAdopterCatInfoToAnimals();
                     CompareAdopterDogInfoToAnimals();
                     CompareAdopterKidInfoToAnimals();
+                    SendOffToAdoptionManager();
+                    Console.Clear();
+                    adoptionManager.WelcomeMessage();
                     DisplayPossiblePets();
                     animal = customer.Search(possiblePets);
-                    brittni.AdoptionProcess(customer, animal);
+                    adoptionManager.AdoptionProcess(customer, animal);
                     break;
                 case "drop off":
+                    SendOffToIntakeManager();
+                    Console.Clear();
+                    intakeManager.WelcomeMessage();
+                    Console.Clear();
                     string typeOfDropOff = GetTypeOfDropOff();
                     if(typeOfDropOff == "own animal")
                     {
-                        GetAnimalInformation();
+                        intakeManager.GetAnimalInformation();
                     }
                     else
                     {
                         Console.WriteLine("Great, I see we have recieved your file of all the animals that are coming to our shelter.\n Let me process this and then you can be on your way!");
                         Console.ReadLine();
-                        file.UploadFile(brittni);
+                        file.UploadFile(intakeManager);
+                        Console.Clear();
                         Console.WriteLine("Looks like everything processed. Have a great day!");
                         Console.ReadLine();
                         Environment.Exit(0);
@@ -114,23 +124,23 @@ namespace HumaneSociety
                 }
             }
         }
-        private void GetAnimalInformation()
-        {
-            Animal animal;
-            animal = brittni.GetInformationAboutAnimal();
-            brittni.GetRoomForAnimal(animal);
-            brittni.ThankPerson();
-        }
         private void SetAdoptersInformation()
         {
-            Console.WriteLine("My name is {0}. Let's have you fill out an adoption applilcation.", brittni.name);
+            Console.WriteLine("Before I send you off to our Adoption Manager, I need you to fill out this adopter profile to find the best pet to fit your family.");
             Console.ReadLine();
+            Console.Clear();
             customer.GetName();
+            Console.Clear();
             customer.GetAge();
+            Console.Clear();
             customer.GetCatStatus();
+            Console.Clear();
             customer.GetDogStatus();
+            Console.Clear();
             customer.GetKidStatus();
+            Console.Clear();
             customer.GetFirstAnimalStatus();
+            Console.Clear();
             customer.CreateAdopter();
             adopter = customer.adopter;
         }
@@ -257,6 +267,11 @@ namespace HumaneSociety
                 Environment.Exit(0);
             }
         }
+        private void SendOffToAdoptionManager()
+        {
+            Console.WriteLine("Thank you for filling out our adopter profile. Let me get the Adoption Manager so we can get the ball rolling today!");
+            Console.ReadLine();
+        }
         private void DisplayPossiblePets()
         {
             int count = 1;
@@ -266,6 +281,11 @@ namespace HumaneSociety
                 Console.WriteLine("{0}. {1} of {2} breed.", count, animal.Animal1, animal.Breed);
                 count++;
             }
+            Console.ReadLine();
+        }
+        private void SendOffToIntakeManager()
+        {
+            Console.WriteLine("Thank you for choosing our humane society. Let me go get our Animal Intake Manager.");
             Console.ReadLine();
         }
     }

@@ -23,7 +23,6 @@ namespace HumaneSociety
             wallet = 300;
             searchedAnimals = new List<Animal>();
         }
-
         public void GetName()
         {
             Console.WriteLine("What is your name?");

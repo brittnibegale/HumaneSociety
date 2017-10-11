@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdoptionManager.cs" />
+    <Compile Include="AnimalIntakeManager.cs" />
     <Compile Include="CSVFile.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Employee.cs" />
@@ -55,6 +57,7 @@
       <DependentUpon>LinqToSQL.dbml</DependentUpon>
     </Compile>
     <Compile Include="MoneyBox.cs" />
+    <Compile Include="Owner.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

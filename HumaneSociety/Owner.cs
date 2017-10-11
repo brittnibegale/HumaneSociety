@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    public interface IimportFile
+    public class Owner: Employee
     {
-        void UploadFile(AnimalIntakeManager employee);
-
+        public Owner()
+        {
+            name = "Sarah";
+            jobTitle = "Owner";
+        }
     }
 }
