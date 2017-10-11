@@ -44,7 +44,7 @@ namespace HumaneSociety
             bool hasShots = CheckForAnimalShots(animal);
             DoesAnimalNeedShots(adopter, hasShots);
             ChangeAnimalToAdopted(adopter, animal);
-            Console.WriteLine("Congrats on adopting the {0}! Thanks for supporting us! Have a great rest of your day!", animal.Breed);
+            Console.WriteLine("Congrats on adopting the {0}! Thanks for supporting us! Just so you know every week this {1} eats {2} amount of cups a food. \n Have a great rest of your day!", animal.Breed, animal.Breed, animal.Food_Amount);
             Console.ReadLine();
             Environment.Exit(0);
         }
