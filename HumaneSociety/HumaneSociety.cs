@@ -172,7 +172,7 @@ namespace HumaneSociety
         private bool GetAdoptersDogStatus()
         {
             LinqToSQLDataContext compare = new LinqToSQLDataContext();
-            var person = compare.Adopters.Single(i => i.Name == adopter.Name);
+            var person = compare.Adopters.Single(i => i.AdopterID == adopter.AdopterID);
             if (person.Have_Dogs == true)
             {
                 return true;
@@ -185,7 +185,7 @@ namespace HumaneSociety
         private bool GetAdoptersKidStatus()
         {
             LinqToSQLDataContext compare = new LinqToSQLDataContext();
-            var person = compare.Adopters.Single(i => i.Name == adopter.Name);
+            var person = compare.Adopters.Single(i => i.AdopterID == adopter.AdopterID);
             if (person.Have_Kids == true)
             {
                 return true;
@@ -205,7 +205,13 @@ namespace HumaneSociety
                 var catResult = compare.Animals.GroupBy(a => a.Likes_Cats).ToList();
                 if (catResult.Count < 1)
                 {
-                    intialPossiblePets = catResult[1].ToList();
+                    foreach(var animals in catResult[1])
+                    {
+                        if(animals.Adoption_Status == false)
+                        {
+                            intialPossiblePets.Add(animal);
+                        }
+                    }
                 }
                 else
                 {
@@ -220,7 +226,10 @@ namespace HumaneSociety
                 var animals = create.Animals.Select(animal => animal);
                 foreach(var animal in animals)
                 {
-                    intialPossiblePets.Add(animal);
+                    if(animal.Adoption_Status == false)
+                    {
+                        intialPossiblePets.Add(animal);
+                    }
                 }
             }
         }
